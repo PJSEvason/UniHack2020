@@ -1,17 +1,7 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
     {% block head %}
     <title>pyLearn editor</title>
-    <script>
-    var textareas = document.getElementByTagName('textarea');
-    var count = textareas.length;
-    for (var i=0;i<count;i++) {
-        textareas[i].onkeydown = function(e) {
-            if (e.keyCode == 9)
-        }
-    }
-    </script> 
-
     {% endblock %}
 
     {% block style %}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+{% load static %}
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -24,18 +24,17 @@
         <!-- Material Design Bootstrap -->
         <link rel="stylesheet" href="css/mdb.min.css" />
         <!-- Your custom styles (optional) -->
-        <link rel="stylesheet" href="learn.css" />
+        <link rel="stylesheet" href="{% static 'learn.css' %}" />
         <link
         rel="stylesheet"
         type="text/css"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         />
-        <link rel="stylesheet" href="css/headerFooter.css" />
-        <script src="codemirror/lib/codemirror.js"></script>
-        <link rel="stylesheet" href="codemirror/lib/codemirror.css"/>
-        <script src="codemirror/mode/python/python.js"></script>
-        <link rel="stylesheet" href="codemirror/theme/solarized.css"/>
-        <script src="codemirror/addon/edit/closebrackets.js"></script>
+        <script src="{% static 'codemirror/lib/codemirror.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'codemirror/lib/codemirror.css' %}"/>
+        <script src="{% static 'codemirror/mode/python/python.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'codemirror/theme/solarized.css' %}"/>
+        <script src="{% static 'codemirror/addon/edit/closebrackets.js' %}"></script>
 
         <title>Python Learn Tutorial</title>
     </head>
@@ -46,17 +45,19 @@
         <div class="page_wrapper">
             <div class="header">
               <nav class="navbar navbar-expand-lg navbar-transparent">
-              <span class="header_text">Some flashy page title here</span>
+              <span class="header_text">{{ title }}</span>
             </nav>
             </div>
             <div class="main">
               <div class="instructions">
-                <span class="instructions_text">DO THIS NOT THAT (tutorial and stuff)</span>
+                <span class="instructions_text">{{ instructions }}</span>
               </div>
               <div class="editor">
-                <textarea id="code_editor" name="code-editor" rows="30" cols="90">
-                     Write code here
-                  </textarea>
+                <form method="post" class="text-center text-light border border-light p-5 h-80 w-50 mx-auto my-6">
+                {% csrf_token %}
+                        {{ form.as_table }}
+                        <button type="submit" name="submit" class="btn btn-primary mx-auto">Submit</button>
+                </form>
                 <script>
                    var editor = CodeMirror.fromTextArea(document.getElementById("code_editor"),{
                      mode: "python",
@@ -67,11 +68,20 @@
                 </script>
                 <br><br><br>
                 <div class="output">
-                  <span class="output_text">Output my dude</span>
+                  <span class="output_text">{{ output | safe }}</span>
                 </div>
               </div>
             </div>
-
+        <div>
+        {% if correct %}
+        Well done!
+        {% if complete %}
+        <a href="{% url 'menu' %}">Finish!</a>  
+        {% else %}
+        <a href="{% url 'start_level' level_num=next_num %}">Next</a>  
+        {% endif %}
+        {% endif %}
+        </div>
           </div>
         </div>
 

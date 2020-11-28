@@ -94,7 +94,7 @@ def levelEditorView(request, level_num):
                     complete = True
     return render(
         request,
-        'formExample.html',
-        {'form': form, 'output': convertTerminalToHTML(output), "correct": compareCode(output, expectedOutput), "next_num": level_num+1, "complete": complete, "instructions": level.instructions}
+        'index.html',
+        {'form': form, 'output': convertTerminalToHTML(output), "correct": compareCode(output, expectedOutput), "next_num": level_num+1, "complete": complete, "instructions": level.instructions, "title": level.title}
     )
 
