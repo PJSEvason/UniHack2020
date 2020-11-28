@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block title %}Menu{% endblock %}
+{% block header %}{% endblock %}
+{% block body %}
+
+{{num}} | {{ title }}
+<br>
+{{ summary }}
+
+<a href="{% url 'editor' level_num=num %}">Next</a>  
+{% endblock %}
