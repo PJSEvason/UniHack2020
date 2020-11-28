@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{% load static %}
 
 <html lang="en">
     <head>
@@ -25,34 +24,52 @@
         <!-- Material Design Bootstrap -->
         <link rel="stylesheet" href="css/mdb.min.css" />
         <!-- Your custom styles (optional) -->
-        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="learn.css" />
         <link
         rel="stylesheet"
         type="text/css"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         />
         <link rel="stylesheet" href="css/headerFooter.css" />
+        <script src="codemirror/lib/codemirror.js"></script>
+        <link rel="stylesheet" href="codemirror/lib/codemirror.css"/>
+        <script src="codemirror/mode/python/python.js"></script>
+        <link rel="stylesheet" href="codemirror/theme/solarized.css"/>
+        <script src="codemirror/addon/edit/closebrackets.js"></script>
 
-        {% block head %}
-        {% endblock %}
+        <title>Python Learn Tutorial</title>
     </head>
     <style>
-        {% block style %}
-        {% endblock %}
     </style>
     <body>
         <div class="my-custom-scrollbar my-custom-scrollbar-primary">
-        {% block header %}
         <div class="page_wrapper">
-            <div class="header ">
+            <div class="header">
               <nav class="navbar navbar-expand-lg navbar-transparent">
-              
+              <span class="header_text">Some flashy page title here</span>
             </nav>
             </div>
-            {% endblock %}
             <div class="main">
-              {% block body %}
-              {% endblock %}
+              <div class="instructions">
+                <span class="instructions_text">DO THIS NOT THAT (tutorial and stuff)</span>
+              </div>
+              <div class="editor">
+                <textarea id="code_editor" name="code-editor" rows="30" cols="90">
+                     Write code here
+                  </textarea>
+                <script>
+                   var editor = CodeMirror.fromTextArea(document.getElementById("code_editor"),{
+                     mode: "python",
+                     theme: "solarized",
+                     lineNumbers: true,
+                     autoCloseBrackets: true
+                   });
+                </script>
+                <br><br><br>
+                <div class="output">
+                  <span class="output_text">Output my dude</span>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -60,7 +77,7 @@
 
     </body>
 <footer class = "page-footer fixed-bottom font-small">
-            <div class="footer-copyright text-center text-black py-3">
-              © Team head empty | Phoebe Evason and Yoana Invanova
+            <div class="footer-copyright text-center text-white py-3">
+              © Team head empty | Phoebe Evason and Yoana Ivanova
             </div>
             </footer>

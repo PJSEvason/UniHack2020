@@ -1,0 +1,70 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.main{
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: #737373;
+}
+.header{
+    width:100%;
+    min-height:10vh;
+    background: #000000;
+    overflow:hidden;
+}
+.header_text{
+    display:block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 4vh;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+}
+.instructions{
+    width:50%;
+    min-height:83vh;
+    background: #333333;
+    overflow:hidden;
+    padding: 33px 55px 33px 55px;
+    position: relative;
+    right: 3%;
+    bottom: 80px;
+    z-index: 2;
+}
+.instructions_text{
+    display:block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3vh;
+    color: #fff;
+}
+.editor{
+    width:50%;
+    min-height:100vh;
+    background: #737373;
+    overflow:hidden;
+    padding: 33px 55px 33px 55px;
+    position: relative;
+    left: 1%;
+    z-index: 1;
+}
+.output{
+    background:#666666;
+    padding: 33px 55px 33px 55px;
+    min-height: 22vh;
+    width: 100%;
+}
+.output_text{
+    color: #fff;
+}
