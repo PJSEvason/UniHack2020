@@ -35,6 +35,7 @@ def convertTerminalToHTML(output):
 def compareCode(code1, code2):
     code1Break = [x for x in code1.split("\n") if x]
     code2Break = [x.replace("\r", "") for x in code2.split("\n") if x]
+    # print(code1Break, code2Break)
     return code1Break == code2Break
     
 def getPerson(request):

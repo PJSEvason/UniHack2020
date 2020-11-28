@@ -50,16 +50,16 @@
             </div>
             <div class="main">
               <div class="instructions">
-                <span class="instructions_text">{{ instructions }}</span>
+                <span class="instructions_text">{{ instructions | safe }}</span>
               </div>
               <div class="editor">
-                <form method="post" class="text-center text-light border border-light p-5 h-80 w-50 mx-auto my-6" action="">
+                <form method="post" id="editor_form" class="text-center text-light border border-light p-5 h-80 w-50 mx-auto my-6" action="">
                 {% csrf_token %}
                   {{ form.as_table }}
                   <button type="submit" name="submit" class="btn btn-primary mx-auto">Submit</button>
                 </form>
                 <script>
-                   var editor = CodeMirror.fromTextArea(document.getElementById("code_editor"),{
+                   var editor = CodeMirror.fromTextArea(document.getElementById("id_code"),{
                      mode: "python",
                      theme: "solarized",
                      lineNumbers: true,

@@ -1,36 +1,28 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from learn.forms import writeCodeForm
+from learn.forms import writeCodeForm, createNewPersonForm
 from learn.models import Person, Level, Progress, Hint
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.forms import UserCreationForm
 from .common import checkCode, convertTerminalToHTML, processPythonFile, getPerson, is_high_enough_level, compareCode
 
-# Create your views here.
-def index(request):
-    processPythonFile("example.py")
-    return render(
-        request,
-        'index.html',
-        {}
-    )
-
-def sampleFormView(request):
-    form = writeCodeForm() # change form
-    output = "Run your code to see the results."
+def userCreationView(request):
+    form1 = UserCreationForm()
+    form2 = createNewPersonForm()
     if request.POST:
-        form = writeCodeForm(request.POST)
-        if form.is_valid():
-            progressObj = form.save(commit=False)
-            progressObj.person = Person.objects.all()[0]
-            progressObj.level = Level.objects.all()[0]
-            expectedOutput = Level.objects.all()[0].expectedOutput
-            output = checkCode(form.cleaned_data['code'], expectedOutput)
-            progressObj.isCorrect = output == expectedOutput
-            # progressObj.save()
+        form1 = UserCreationForm(request.POST)
+        form2 = createNewPersonForm(request.POST)
+        if form1.is_valid() and form2.is_valid():
+            user = form1.save(commit = False)
+            person = form2.save(commit=False)
+            person.username = user.username
+            person.topLevel = Level.objects.get(pk=1)
+            user.save()
+            person.save()
     return render(
         request,
-        'formExample.html',
-        {'form': form, 'output': convertTerminalToHTML(output)}
+        'registration/signup.html',
+        {'form1': form1, 'form2': form2}
     )
 
 # shows their name and all levels with their title
@@ -41,6 +33,7 @@ def menuScreenView(request):
     displayLevels = []
     maxLevelAvailable = person.topLevel.pk
     for level in levels:
+        print(level.pk, maxLevelAvailable)
         if level.pk <= maxLevelAvailable:
             displayLevels.append({'num': level.pk, 'title': level.title, 'available': True})
         else:
@@ -86,7 +79,6 @@ def levelEditorView(request, level_num):
             progressObj.isCorrect = output == expectedOutput
             progressObj.save()
             isCorrect = compareCode(output, expectedOutput)
-            print(output, expectedOutput, isCorrect)
             if isCorrect:
                 if Level.objects.filter(pk=level_num+1).exists():
                     person.topLevel=Level.objects.get(pk=level_num+1)
@@ -96,6 +88,6 @@ def levelEditorView(request, level_num):
     return render(
         request,
         'index.html',
-        {'form': form, 'output': convertTerminalToHTML(output), "correct": compareCode(output, expectedOutput), "next_num": level_num+1, "complete": complete, "instructions": level.instructions, "title": level.title}
+        {'form': form, 'output': convertTerminalToHTML(output), "correct": compareCode(output, expectedOutput), "next_num": level_num+1, "complete": complete, "instructions": convertTerminalToHTML(level.instructions), "title": level.title}
     )
 
