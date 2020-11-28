@@ -1,4 +1,1 @@
-import os
-print("Hello World!")
-for i in range(90):
-    print(i)
+for i in range(1`):P

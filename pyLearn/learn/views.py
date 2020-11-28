@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from learn.forms import writeCodeForm
 from learn.models import Person, Level, Progress, Hint
-from .common import checkCode, convertTerminalToHTML
+from .common import checkCode, convertTerminalToHTML, processPythonFile
 
 # Create your views here.
 def index(request):

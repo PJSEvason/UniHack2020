@@ -1,22 +1,27 @@
 from django.conf import settings
 import subprocess
+from threading import Timer
 
 def processPythonFile(filename):
-    print(settings.MEDIA_ROOT)
     cmd = subprocess.Popen(["python3", "%s/%s" % (settings.MEDIA_ROOT, filename)], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    output = []
-    for line in cmd.stdout.readlines():
-        line = line.strip().decode("utf-8").strip('\x00')
-        output.append(line)
-    return "\n".join(output)
+    timer = Timer(0.5, lambda process: process.kill(), [cmd])
+    try:
+        timer.start()
+        stdout, _ = cmd.communicate()
+    finally:
+        timer.cancel()
+
+    output = stdout.strip().decode("utf-8").strip('\x00')
+    return output
 
 
 def checkCode(code, expectedOutput):
-    print(code, expectedOutput)
     with open( "%s/%s.py" % (settings.MEDIA_ROOT, "userID_editor"), "w") as file:
         file.write(code)
     if "import" in code:
         return "Error. Please do not use any external packages in your code."
+    if "while True" in code:
+        return "Error. You don't want to use an infinite loop. Try again."
     output = processPythonFile("userID_editor.py")
     return output
 
@@ -24,3 +29,5 @@ def checkCode(code, expectedOutput):
 def convertTerminalToHTML(output):
     formatted = output.split("\n")
     return "<br>".join(formatted)
+
+#Infinite loops are bad, add time out
