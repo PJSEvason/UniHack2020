@@ -86,6 +86,7 @@ def levelEditorView(request, level_num):
             progressObj.isCorrect = output == expectedOutput
             progressObj.save()
             isCorrect = compareCode(output, expectedOutput)
+            print(output, expectedOutput, isCorrect)
             if isCorrect:
                 if Level.objects.filter(pk=level_num+1).exists():
                     person.topLevel=Level.objects.get(pk=level_num+1)

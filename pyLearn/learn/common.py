@@ -37,7 +37,6 @@ def compareCode(code1, code2):
     code2Break = [x.replace("\r", "") for x in code2.split("\n") if x]
     return code1Break == code2Break
     
-
 def getPerson(request):
     username = request.user.username
     if request.user.is_authenticated:

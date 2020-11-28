@@ -53,10 +53,10 @@
                 <span class="instructions_text">{{ instructions }}</span>
               </div>
               <div class="editor">
-                <form method="post" class="text-center text-light border border-light p-5 h-80 w-50 mx-auto my-6">
+                <form method="post" class="text-center text-light border border-light p-5 h-80 w-50 mx-auto my-6" action="">
                 {% csrf_token %}
-                        {{ form.as_table }}
-                        <button type="submit" name="submit" class="btn btn-primary mx-auto">Submit</button>
+                  {{ form.as_table }}
+                  <button type="submit" name="submit" class="btn btn-primary mx-auto">Submit</button>
                 </form>
                 <script>
                    var editor = CodeMirror.fromTextArea(document.getElementById("code_editor"),{
@@ -70,17 +70,19 @@
                 <div class="output">
                   <span class="output_text">{{ output | safe }}</span>
                 </div>
+                {% if correct %}
+                Well done!
+                {% if complete %}
+                <a href="{% url 'menu' %}">Finish!</a>  
+                {% else %}
+                <a href="{% url 'start_level' level_num=next_num %}">Next</a>  
+                {% endif %}
+                {% else %}
+                Try again! If you're stuck, check the hints :)
+                {% endif %}
               </div>
             </div>
         <div>
-        {% if correct %}
-        Well done!
-        {% if complete %}
-        <a href="{% url 'menu' %}">Finish!</a>  
-        {% else %}
-        <a href="{% url 'start_level' level_num=next_num %}">Next</a>  
-        {% endif %}
-        {% endif %}
         </div>
           </div>
         </div>
