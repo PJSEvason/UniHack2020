@@ -1,6 +1,8 @@
 from django.conf import settings
 import subprocess
 from threading import Timer
+from learn.models import Person, Level, Progress, Hint
+
 
 def processPythonFile(filename):
     cmd = subprocess.Popen(["python3", "%s/%s" % (settings.MEDIA_ROOT, filename)], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -30,4 +32,22 @@ def convertTerminalToHTML(output):
     formatted = output.split("\n")
     return "<br>".join(formatted)
 
-#Infinite loops are bad, add time out
+def compareCode(code1, code2):
+    code1Break = [x for x in code1.split("\n") if x]
+    code2Break = [x.replace("\r", "") for x in code2.split("\n") if x]
+    return code1Break == code2Break
+    
+
+def getPerson(request):
+    username = request.user.username
+    if request.user.is_authenticated:
+        if Person.objects.filter(username=username).exists():
+            return Person.objects.get(username=username)
+        p = Person(username=username)
+        p.save()
+        return p
+
+def is_high_enough_level(person, level):
+    if person.topLevel.pk >= level:
+        return True
+    return False

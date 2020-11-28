@@ -18,6 +18,7 @@
     {% endblock %}
 
     {% block body %}
+    {{instructions}}
         <form method="post" class="text-center text-light border border-light p-5 h-80 w-50 mx-auto my-6">
         {% csrf_token %}
         <div class="form-row align-items-center">
@@ -31,4 +32,13 @@
         </form>
 
         {{ output|safe }}
+
+        {% if correct %}
+        Well done!
+        {% if complete %}
+        <a href="{% url 'menu' %}">Finish!</a>  
+        {% else %}
+        <a href="{% url 'start_level' level_num=next_num %}">Next</a>  
+        {% endif %}
+        {% endif %}
     {% endblock %}

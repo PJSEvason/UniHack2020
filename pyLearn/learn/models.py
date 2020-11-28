@@ -9,6 +9,7 @@ class Level(models.Model):
     expectedOutput = models.TextField(max_length=1000)    
 
 class Person(models.Model):
+    username = models.CharField(max_length=20, default="Username")
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     topLevel = models.ForeignKey(Level, on_delete=models.SET_NULL, verbose_name="most recent level", null=True)
