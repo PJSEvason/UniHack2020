@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Person, Level, Progress, Hint
+from .models import Person, Level, Progress
 
 # access admin page at 127.0.0.1:8000/admin
 # user: dev
@@ -11,4 +11,3 @@ from .models import Person, Level, Progress, Hint
 admin.site.register(Person)
 admin.site.register(Level)
 admin.site.register(Progress)
-admin.site.register(Hint)

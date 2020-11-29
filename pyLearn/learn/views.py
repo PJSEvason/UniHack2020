@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from learn.forms import writeCodeForm, createNewPersonForm
-from learn.models import Person, Level, Progress, Hint
+from learn.models import Person, Level, Progress
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import UserCreationForm
 from .common import checkCode, convertTerminalToHTML, processPythonFile, getPerson, is_high_enough_level, compareCode
@@ -80,10 +80,10 @@ def levelEditorView(request, level_num):
             progressObj.save()
             isCorrect = compareCode(output, expectedOutput)
             if isCorrect:
-                if Level.objects.filter(pk=level_num+1).exists():
+                if person.topLevel.pk == level_num:
                     person.topLevel=Level.objects.get(pk=level_num+1)
-                    person.save()
-                else:
+                person.save()
+                if not Level.objects.filter(pk=level_num+1).exists():
                     complete = True
     return render(
         request,

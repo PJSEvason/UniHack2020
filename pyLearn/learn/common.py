@@ -1,7 +1,7 @@
 from django.conf import settings
 import subprocess
 from threading import Timer
-from learn.models import Person, Level, Progress, Hint
+from learn.models import Person, Level, Progress
 
 
 def processPythonFile(filename):
