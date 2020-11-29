@@ -40,24 +40,13 @@
     padding: 33px 55px 33px 55px;
     position: relative;
     right: 3%;
-    bottom: 80px;
     z-index: 2;
 }
 .instructions_text{
     display:block;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 3vh;
+    font-size: 2vh;
     color: #fff;
-}
-.editor{
-    width:50%;
-    min-height:100vh;
-    background: #737373;
-    overflow:hidden;
-    padding: 33px 55px 33px 55px;
-    position: relative;
-    left: 1%;
-    z-index: 1;
 }
 .output{
     background:#666666;

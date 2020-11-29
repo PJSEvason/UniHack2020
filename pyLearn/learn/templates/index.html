@@ -39,6 +39,21 @@
         <title>Python Learn Tutorial</title>
     </head>
     <style>
+      .instructions{
+        position: relative;
+        bottom: 15px;
+      }
+      .editor_form{
+        position: relative;
+        bottom: 70px;
+      }
+      .output{
+        width: 50%;
+        position: relative;
+        left: 35%;
+        bottom: 125px;
+        min-height: 15vh;
+      }
     </style>
     <body>
         <div class="my-custom-scrollbar my-custom-scrollbar-primary">
@@ -50,10 +65,9 @@
             </div>
             <div class="main">
               <div class="instructions">
-                <span class="instructions_text">{{ instructions | safe }}</span>
+                <span class="instructions_text" style="font-size:2.3vh">{{ instructions | safe }}</span>
               </div>
-              <div class="editor">
-                <form method="post" id="editor_form" class="text-center text-light border border-light p-5 h-80 w-50 mx-auto my-6" action="">
+                <form method="post" id="editor_form" class=" editor_form text-light border border-light p-5 h-80 w-50 mx-auto my-6" action="">
                 {% csrf_token %}
                   {{ form.as_table }}
                   <button type="submit" name="submit" class="btn btn-primary mx-auto">Submit</button>
@@ -80,7 +94,6 @@
                 {% else %}
                 Try again! If you're stuck, check the hints :)
                 {% endif %}
-              </div>
             </div>
         <div>
         </div>
