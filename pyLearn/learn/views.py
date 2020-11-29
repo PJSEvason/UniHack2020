@@ -4,7 +4,10 @@ from learn.forms import writeCodeForm, createNewPersonForm
 from learn.models import Person, Level, Progress
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
 from .common import checkCode, convertTerminalToHTML, processPythonFile, getPerson, is_high_enough_level, compareCode
+from django.urls import reverse
+from django.shortcuts import redirect
 
 def userCreationView(request):
     form1 = UserCreationForm()
@@ -19,6 +22,9 @@ def userCreationView(request):
             person.topLevel = Level.objects.get(pk=1)
             user.save()
             person.save()
+            loginUser = authenticate(username = form1.cleaned_data['username'], password=form1.cleaned_data['password1'],)
+            login(request, loginUser)
+            return redirect(reverse('menu'))
     return render(
         request,
         'registration/signup.html',
@@ -33,7 +39,6 @@ def menuScreenView(request):
     displayLevels = []
     maxLevelAvailable = person.topLevel.pk
     for level in levels:
-        print(level.pk, maxLevelAvailable)
         if level.pk <= maxLevelAvailable:
             displayLevels.append({'num': level.pk, 'title': level.title, 'available': True})
         else:
