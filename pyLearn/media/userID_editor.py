@@ -1,4 +1,6 @@
-rainbow_colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"]
-print(rainbow_colors[4])
-rainbow_colors.append("pink")
-print(rainbow_colors)
+#Write your code here
+print(11)
+print(-1)
+print(18)
+print(16)
+print(1)
