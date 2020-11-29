@@ -21,6 +21,13 @@
         left: 32%;
         font-size: 3vh;
     }
+    .logout-wrap{
+        font-size: 3vh;
+        width: 20%;
+        position: relative;
+        left: 50%;
+        top: 20px;
+    }
 {% endblock %}
 {% block body %}
 <div class="name-wrap">
@@ -39,5 +46,7 @@
 {% endfor %}
 </ul>
 </div>
-
+<div class="logout-wrap">
+<a href="{% url 'logout' %}">Logout</a>
+</div>
 {% endblock %}
