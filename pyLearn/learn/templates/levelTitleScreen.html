@@ -1,16 +1,43 @@
-{% extends 'base.html' %}
-
-<link rel="import" href="base.html"/>
 <head>
-    <title>{{title}}</title>
+    <title>Menu</title>
 </head>
-{% block title %}Menu{% endblock %}
+{% extends 'base.html' %}
+{% block style %}
+
+    .title_wrap{
+        background-color: black;
+        border-radius: 100px;
+        width: 30%;
+        color: white;
+        height: 10%;
+        text-align: center;
+        padding: 15px;
+        position: relative;
+        left: 35%;
+        top: 90px;
+        font-size: 4vh;
+    }
+    .summary_wrap{
+        background-color: white;
+        width: 24%;
+        min-height: 10vh;
+        text-align: center;
+        font-size: 3vh;
+        position: relative;
+        left: 38%;
+        top: 120px;
+    }
+{% endblock %}
 {% block header %}{% endblock %}
 {% block body %}
-
+<div class="title_wrap">
 {{num}} | {{ title }}
+</div>
 <br>
+<div class="summary_wrap">
 {{ summary }}
-
-<a href="{% url 'editor' level_num=num %}">Next</a>  
+<br><br><br>
+<a href="{% url 'editor' level_num=num %}">Next</a>
+<br><br>
+</div>
 {% endblock %}

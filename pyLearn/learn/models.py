@@ -17,5 +17,5 @@ class Person(models.Model):
 class Progress(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name="this person")
     level = models.ForeignKey(Level, on_delete=models.CASCADE, verbose_name="this level")
-    code = models.TextField(max_length=1000, default="Write your code here")
+    code = models.TextField(max_length=1000, default="#Write your code here")
     isCorrect = models.BooleanField(default=False)

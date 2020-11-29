@@ -1,10 +1,33 @@
+<head>
+    <title>Menu</title>
+</head>
 {% extends 'base.html' %}
-
-{% block title %}Menu{% endblock %}
-{% block header %}{% endblock %}
+{% block style %}
+    .name-wrap{
+        color: white;
+        padding: 1%;
+        font-size: 4vh;
+        width: 40%;
+        position: relative;
+        left: 45%;
+    }
+    .levels-wrap{
+        color:white;
+        background-color: black;
+        border-radius: 20px;
+        width: 40%;
+        min-height: 20vh;
+        position: relative;
+        left: 32%;
+        font-size: 3vh;
+    }
+{% endblock %}
 {% block body %}
-
+<div class="name-wrap">
 {{ name }}
+</div>
+<br><br>
+<div class="levels-wrap">
 <ul>
 {% for level in levels %}
 <li>
@@ -15,5 +38,6 @@
 </li>
 {% endfor %}
 </ul>
+</div>
 
 {% endblock %}
